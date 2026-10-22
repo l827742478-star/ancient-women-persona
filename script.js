@@ -12,6 +12,17 @@ const figures = {
   xie: { name: "谢道韫", type: "清醒型", english: "THE CLEAR-EYED", color: "#657580", tagline: "你有自己的尺度，不会轻易把判断交给人群。", body: "你喜欢直接面对问题，也不太愿意为了合群而假装认同。你有幽默、机锋和清晰的边界感，能在热闹里保持自己的观察。你不必成为最喧闹的人，也可以成为最难被忽略的那个人。", advice: "清醒不是永远站在局外。遇到值得的人和事，也可以让自己参与得更深。", share: "我可以温柔，但不会把判断力交出去。" }
 };
 
+const portraitImages = {
+  wu: "wu.png",
+  mulan: "mulan.png",
+  liqing: "liqing.png",
+  banzhao: "banzhao.png",
+  shangguan: "shangguan.png",
+  zhaojun: "zhaojun.png",
+  cai: "cai.png",
+  xie: "xie.png"
+};
+
 const questions = [
   { tag: "入局方式", title: "走进一个完全陌生的场合，你会先做什么？", hint: "选最接近你真实第一反应的一项。", options: [
     ["先观察谁在做决定，规则从哪里开始。", ["wu", "shangguan"], [4, 1, 0, 1, 2, 0]],
@@ -150,6 +161,7 @@ function renderHome() {
     <div class="hero-visual" aria-label="示例人物卷轴">
       <div class="scroll-card">
         <div class="scroll-card-top"><span>人物卷 · 试阅</span><span>一 / 八</span></div>
+        <div class="scroll-card-portrait"><img src="${portraitImages.xie}" alt="谢道韫古风人物画像" /></div>
         <div class="scroll-card-seal" aria-hidden="true">女</div>
         <div class="scroll-card-content"><p class="scroll-card-kicker">清醒型</p><h2>谢道韫</h2><p>清醒而有锋芒，不把判断力交给人群。</p></div>
         <div class="scroll-card-footer"><span>可保存 · 可分享</span><span class="seal-mark" aria-hidden="true">鉴</span></div>
@@ -180,7 +192,7 @@ function renderResult() {
   const stored = state.lastResult || JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
   if (!stored) { state.screen = "home"; renderHome(); return; }
   const figure = figures[stored.key]; const dims = dimensionScores(stored.scores); state.lastResult = stored;
-  app.innerHTML = `<section class="result-shell"><div class="result-layout"><div class="result-copy"><p class="result-kicker">人物判词 · 你的结果</p><div class="result-nameplate"><span>原型</span><h1 style="--figure-color:${figure.color}">${figure.name}</h1><b>${figure.type}</b></div><p class="result-tagline">${figure.tagline}</p><p class="result-body">${figure.body}</p><div class="result-actions"><button class="primary-btn" data-action="download"><span class="button-seal" aria-hidden="true">印</span>下载判词卡</button><button class="secondary-btn" data-action="copy">复制判词文案</button></div><p class="result-disclaimer">趣味人物原型映射，不构成历史评价、心理测评或人生结论。</p><div class="dimension-list"><div class="dimension-heading"><span>六维气质</span><span>相对倾向</span></div>${dims.map((dim) => `<div class="dimension"><span>${dim.name}</span><div class="dimension-bar"><i style="width:${dim.value}%;background:${figure.color}"></i></div><span>${dim.value}</span></div>`).join("")}</div></div><div class="share-card" id="share-card" style="--figure-color:${figure.color}"><div class="share-card-top"><span>人物签 · 一 / 八</span><span>古代女性人物鉴</span></div><div class="share-card-seal" aria-hidden="true">鉴</div><div class="share-card-main"><p class="share-card-label">${figure.english}</p><h2>${figure.name}</h2><p class="quote">“${figure.share}”</p></div><div class="share-card-footer"><span>${figure.type}</span><strong>保存 / 分享</strong></div></div></div><div class="result-bottom"><button class="text-btn" data-action="again">↻ 再开一卷</button><button class="text-btn" data-action="home">⌂ 回到首页</button></div></section>`;
+  app.innerHTML = `<section class="result-shell"><div class="result-layout"><div class="result-copy"><p class="result-kicker">人物判词 · 你的结果</p><div class="result-nameplate"><span>原型</span><h1 style="--figure-color:${figure.color}">${figure.name}</h1><b>${figure.type}</b></div><p class="result-tagline">${figure.tagline}</p><p class="result-body">${figure.body}</p><div class="result-actions"><button class="primary-btn" data-action="download"><span class="button-seal" aria-hidden="true">印</span>下载判词卡</button><button class="secondary-btn" data-action="copy">复制判词文案</button></div><p class="result-disclaimer">趣味人物原型映射，不构成历史评价、心理测评或人生结论。</p><div class="dimension-list"><div class="dimension-heading"><span>六维气质</span><span>相对倾向</span></div>${dims.map((dim) => `<div class="dimension"><span>${dim.name}</span><div class="dimension-bar"><i style="width:${dim.value}%;background:${figure.color}"></i></div><span>${dim.value}</span></div>`).join("")}</div></div><div class="share-card" id="share-card" style="--figure-color:${figure.color}"><div class="share-card-top"><span>人物签 · 一 / 八</span><span>古代女性人物鉴</span></div><div class="share-card-portrait"><img src="${portraitImages[stored.key]}" alt="${figure.name}古风人物画像" /></div><div class="share-card-seal" aria-hidden="true">鉴</div><div class="share-card-main"><p class="share-card-label">${figure.english}</p><h2>${figure.name}</h2><p class="quote">“${figure.share}”</p></div><div class="share-card-footer"><span>${figure.type}</span><strong>保存 / 分享</strong></div></div></div><div class="result-bottom"><button class="text-btn" data-action="again">↻ 再开一卷</button><button class="text-btn" data-action="home">⌂ 回到首页</button></div></section>`;
   document.querySelector('[data-action="download"]').addEventListener("click", () => downloadCard(figure, dims));
   document.querySelector('[data-action="copy"]').addEventListener("click", () => copyResult(figure));
   document.querySelector('[data-action="again"]').addEventListener("click", () => { resetProgress(); state.screen = "quiz"; renderQuiz(); scrollTop(); });

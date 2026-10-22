@@ -99,10 +99,13 @@ h1, h2, h3, p { margin-top: 0; }
 .scroll-card::before { content: ""; position: absolute; inset: 11px; pointer-events: none; border: 1px solid rgba(48, 76, 74, .34); }
 .scroll-card::after { content: ""; position: absolute; left: 0; right: 0; top: 38px; height: 1px; background: var(--gold); opacity: .8; }
 .scroll-card-top, .share-card-top { display: flex; justify-content: space-between; position: relative; z-index: 2; color: var(--jade); font-size: 12px; letter-spacing: .12em; }
+.scroll-card-portrait { position: absolute; z-index: 0; top: 57px; right: 29px; width: 236px; height: 272px; overflow: hidden; border: 1px solid var(--gold); background: var(--paper-deep); }
+.scroll-card-portrait::after, .share-card-portrait::after { content: ""; position: absolute; inset: 7px; pointer-events: none; border: 1px solid rgba(248, 243, 232, .72); }
+.scroll-card-portrait img, .share-card-portrait img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; filter: saturate(.88) sepia(.1) contrast(.98); }
 .scroll-card-seal { position: absolute; z-index: 1; top: 98px; right: 52px; width: 104px; height: 104px; display: grid; place-items: center; color: var(--cinnabar); border: 2px solid var(--cinnabar); font-size: 57px; line-height: 1; transform: rotate(7deg); opacity: .8; }
 .scroll-card-seal::before, .scroll-card-seal::after { content: ""; position: absolute; width: 70px; height: 1px; background: var(--cinnabar); opacity: .35; transform: rotate(45deg); }
 .scroll-card-seal::after { transform: rotate(-45deg); }
-.scroll-card-content { position: absolute; left: 33px; right: 33px; bottom: 107px; z-index: 2; }
+.scroll-card-content { position: absolute; left: 33px; right: 33px; bottom: 107px; z-index: 2; padding: 12px 12px 12px 0; background: linear-gradient(90deg, rgba(248, 243, 232, .98) 0%, rgba(248, 243, 232, .9) 58%, rgba(248, 243, 232, 0) 100%); }
 .scroll-card-kicker, .share-card-label { color: var(--cinnabar); font-size: 12px; letter-spacing: .15em; margin-bottom: 13px; }
 .scroll-card h2 { margin: 0 0 17px; color: var(--jade); font-size: clamp(64px, 8vw, 95px); line-height: .95; letter-spacing: .05em; font-weight: 700; }
 .scroll-card-content > p:last-child { max-width: 245px; color: var(--ink-soft); font-size: 15px; line-height: 1.8; margin: 0; }
@@ -178,8 +181,9 @@ details p { color: var(--ink-soft); margin: 12px 0 2px; max-width: 700px; font-s
 .share-card { min-height: 470px; padding: 31px; position: relative; overflow: hidden; color: var(--ink); background: var(--paper-light); border: 1px solid var(--gold); box-shadow: var(--shadow); }
 .share-card::before { content: ""; position: absolute; inset: 12px; pointer-events: none; border: 1px solid rgba(48, 76, 74, .35); }
 .share-card::after { content: ""; position: absolute; left: 0; right: 0; top: 42px; height: 1px; background: var(--gold); }
+.share-card-portrait { position: absolute; z-index: 0; top: 57px; left: 31px; right: 31px; height: 208px; overflow: hidden; border: 1px solid var(--gold); background: var(--paper-deep); }
 .share-card-seal { position: absolute; z-index: 1; top: 108px; right: 47px; width: 102px; height: 102px; display: grid; place-items: center; color: var(--cinnabar); border: 2px solid var(--cinnabar); font-size: 57px; line-height: 1; transform: rotate(6deg); opacity: .82; }
-.share-card-main { position: absolute; left: 31px; right: 31px; bottom: 107px; z-index: 2; }
+.share-card-main { position: absolute; left: 31px; right: 31px; bottom: 107px; z-index: 2; padding: 11px 12px 0 0; background: linear-gradient(90deg, rgba(248, 243, 232, .98) 0%, rgba(248, 243, 232, .92) 70%, rgba(248, 243, 232, .15) 100%); }
 .share-card h2 { color: var(--jade); font-size: clamp(66px, 7vw, 96px); line-height: .95; letter-spacing: .05em; margin: 0 0 18px; }
 .quote { color: var(--ink-soft); max-width: 290px; line-height: 1.9; position: relative; font-size: 15px; }
 .share-card-footer { position: absolute; z-index: 2; left: 31px; right: 31px; bottom: 27px; display: flex; justify-content: space-between; color: var(--jade-soft); font-size: 12px; }
@@ -201,6 +205,7 @@ details p { color: var(--ink-soft); margin: 12px 0 2px; max-width: 700px; font-s
   .hero-lede { font-size: 17px; }
   .hero-visual { min-height: 445px; }
   .scroll-card { min-height: 430px; }
+  .scroll-card-portrait { top: 53px; right: 24px; width: 194px; height: 220px; }
   .scroll-card-content { bottom: 91px; }
   .hero-float-note { right: -4px; bottom: 5px; }
   .metric-strip { grid-template-columns: 1fr; gap: 14px; margin: 0 22px 80px; padding: 21px 0; }
@@ -220,6 +225,8 @@ details p { color: var(--ink-soft); margin: 12px 0 2px; max-width: 700px; font-s
   .quiz-actions > span { display: none; }
   .result-shell h1 { font-size: 88px; }
   .share-card { min-height: 390px; }
+  .share-card-portrait { top: 51px; height: 166px; }
+  .share-card-main { bottom: 89px; }
   .result-bottom { margin-top: 40px; }
 }
 @media (max-width: 410px) {
@@ -228,5 +235,6 @@ details p { color: var(--ink-soft); margin: 12px 0 2px; max-width: 700px; font-s
   .scroll-card-content { left: 25px; right: 25px; }
   .scroll-card-footer { left: 25px; right: 25px; }
   .scroll-card-seal { right: 32px; }
+  .scroll-card-portrait { right: 22px; width: 180px; height: 208px; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
